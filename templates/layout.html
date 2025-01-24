@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Template</title>
+    <style>
+      .main-body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+
+      .layout-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: {{styles.bodyBgColor}};
+        color: {{styles.bodyTextColor}};
+      }
+
+      .layout-header {
+        padding: 20px;
+        text-align: {{styles.titleAlignment}};
+        font-weight: bold;
+        background-color: {{styles.headerBgColor}};
+        color: {{styles.headerTextColor}};
+      }
+
+      .layout-content {
+        padding: 20px;
+        background-color: {{styles.bodyBgColor}};
+        color: {{styles.bodyTextColor}};
+        font-size: {{styles.contentFontSize}};
+        text-align: {{styles.contentAlignment}};
+        white-space: pre-line;
+        margin-bottom: 20px;
+      }
+
+      .layout-image-container {
+        width: 100%;
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .layout-image-container img {
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+      }
+
+      .layout-footer {
+        padding: 10px;
+        text-align: {{styles.footerAlignment}};
+        background-color: {{styles.footerBgColor}};
+        color: {{styles.footerTextColor}};
+        font-size: {{styles.footerFontSize}};
+      }
+    </style>
+  </head>
+
+  <body class="main-body">
+    <div class="layout-container">
+      <div class="layout-header">
+        <h1 style="font-size: {{styles.titleFontSize}}">{{{title}}}</h1>
+      </div>
+
+      <!-- <div class="layout-content"> -->
+      {{#if imageUrl}}
+      <div class="layout-image-container">
+        <img src="{{{imageUrl}}}" alt="Email Image" />
+      </div>
+      {{/if}}
+
+      <div class="layout-content">{{{content}}}</div>
+      <!-- </div> -->
+
+      <div class="layout-footer">{{{footer}}}</div>
+    </div>
+  </body>
+</html>
