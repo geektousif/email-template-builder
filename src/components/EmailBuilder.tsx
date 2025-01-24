@@ -27,7 +27,7 @@ const EmailBuilder = () => {
   const [preview, setPreview] = useState("");
 
   const fetchEmailLayout = async () => {
-    const layout = await getLayout();
+    const layout: any = await getLayout();
     setPreview(layout);
   };
 

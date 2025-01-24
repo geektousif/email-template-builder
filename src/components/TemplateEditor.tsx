@@ -53,7 +53,7 @@ const TemplateEditor = ({ template, setTemplate }: any) => {
     try {
       const formData = new FormData();
       formData.append("image", imageRef.current as File);
-      const response = await uploadImage(formData);
+      const response: any = await uploadImage(formData);
       setTemplate((prevTemplate: any) => ({
         ...prevTemplate,
         imageUrl: response.data,
@@ -64,7 +64,7 @@ const TemplateEditor = ({ template, setTemplate }: any) => {
   };
 
   const saveTemplate = async () => {
-    const response = await saveEmailConfig(template);
+    const response: any = await saveEmailConfig(template);
     console.log(response);
 
     window.open(

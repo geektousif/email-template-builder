@@ -7,20 +7,25 @@ export default defineConfig(({ mode }) => {
 
   return {
     server: {
-      proxy: {
-        "/api": {
-          target: env.VITE_BACKEND_URL,
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ""),
-
-          configure: (proxy, _options) => {
-            proxy.on("error", (err, _req, _res) => {
-              console.error("proxy error", err);
-            });
-          },
-        },
+      // proxy: {
+      //   "/api": {
+      //     target: env.VITE_BACKEND_URL,
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/api/, ""),
+      //     configure: (proxy, _options) => {
+      //       proxy.on("error", (err, _req, _res) => {
+      //         console.error("proxy error", err);
+      //       });
+      //     },
+      //   },
+      // },
+      cors: {
+        origin: env.VITE_BACKEND_URL,
       },
     },
     plugins: [react()],
+    define: {
+      "import.meta.env.VITE_BACKEND_URL": JSON.stringify(env.VITE_BACKEND_URL),
+    },
   };
 });
