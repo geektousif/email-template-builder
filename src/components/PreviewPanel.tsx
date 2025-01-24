@@ -1,6 +1,6 @@
 import Handlebars from "handlebars";
 
-const PreviewPanel = ({ template, preview }) => {
+const PreviewPanel = ({ template, preview }: any) => {
   const renderPreview = () => {
     try {
       console.log(template);

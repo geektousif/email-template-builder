@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
 
-          configure: (proxy, options) => {
+          configure: (proxy, _options) => {
             proxy.on("error", (err, _req, _res) => {
               console.error("proxy error", err);
             });

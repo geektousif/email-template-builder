@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { saveEmailConfig, uploadImage } from "../api";
 
-const TemplateEditor = ({ template, setTemplate }) => {
+const TemplateEditor = ({ template, setTemplate }: any) => {
   const imageRef = useRef<File | null>(null);
   const [activeTab, setActiveTab] = useState("design");
 
@@ -15,7 +15,7 @@ const TemplateEditor = ({ template, setTemplate }) => {
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
-    setTemplate((prevTemplate) => ({
+    setTemplate((prevTemplate: any) => ({
       ...prevTemplate,
       [name]: value,
     }));
@@ -54,7 +54,7 @@ const TemplateEditor = ({ template, setTemplate }) => {
       const formData = new FormData();
       formData.append("image", imageRef.current as File);
       const response = await uploadImage(formData);
-      setTemplate((prevTemplate) => ({
+      setTemplate((prevTemplate: any) => ({
         ...prevTemplate,
         imageUrl: response.data,
       }));
@@ -96,7 +96,7 @@ const TemplateEditor = ({ template, setTemplate }) => {
               name={key}
               value={template.styles[key]}
               onChange={(e) =>
-                setTemplate((prevTemplate) => ({
+                setTemplate((prevTemplate: { styles: any }) => ({
                   ...prevTemplate,
                   styles: {
                     ...prevTemplate.styles,
@@ -130,7 +130,7 @@ const TemplateEditor = ({ template, setTemplate }) => {
                   name={key}
                   value={parseInt(template.styles[key])}
                   onChange={(e) =>
-                    setTemplate((prevTemplate) => ({
+                    setTemplate((prevTemplate: { styles: any }) => ({
                       ...prevTemplate,
                       styles: {
                         ...prevTemplate.styles,
@@ -167,7 +167,7 @@ const TemplateEditor = ({ template, setTemplate }) => {
                         value={alignment}
                         checked={template.styles[key] === alignment}
                         onChange={(e) =>
-                          setTemplate((prevTemplate) => ({
+                          setTemplate((prevTemplate: { styles: any }) => ({
                             ...prevTemplate,
                             styles: {
                               ...prevTemplate.styles,
