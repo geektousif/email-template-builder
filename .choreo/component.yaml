@@ -3,7 +3,7 @@ endpoints:
   - name: email-template-builder
     displayName: email-template-builder
     service:
-      basePath: /
+      basePath: /api
       port: 3000
     type: REST
     networkVisibilities:
