@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  title: Email Template API
+  description: API for managing email templates and images
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /getLayout:
+    get:
+      summary: Get email layout
+      description: Retrieve the HTML layout for email templates
+      responses:
+        "200":
+          description: HTML layout retrieved successfully
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /uploadImage:
+    post:
+      summary: Upload an image
+      description: Upload an image to be used in email templates
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: Image uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "400":
+          description: No file uploaded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /uploadEmailConfig:
+    post:
+      summary: Upload email configuration
+      description: Upload configuration details for an email template
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                title:
+                  type: string
+                content:
+                  type: string
+                footer:
+                  type: string
+                imageUrl:
+                  type: string
+                styles:
+                  type: object
+                  additionalProperties: true
+      responses:
+        "200":
+          description: Template created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "400":
+          description: All fields are required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /renderAndDownloadTemplate/{id}:
+    get:
+      summary: Render and download email template
+      description: Render an email template and download it as an HTML file
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the template to render
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Template rendered and downloaded successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        "404":
+          description: Template not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
